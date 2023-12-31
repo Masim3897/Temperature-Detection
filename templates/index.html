@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<body>
+
+
+
+    
+<div id="myPlot" style="width:100%;max-width:700px"></div>
+
+<script>
+//const xArray = ["Lahore", "Karachi", "Sialkot", "Peshawar", "Gujranwala"];
+//const yArray = [55, 49, 44, 24, 15];
+
+const xArray = [];
+const yArray = [];
+
+        {% for city_name in names %}
+                      xArray.push("{{city_name}}");
+        {% endfor %}
+
+         {% for temp_value in temp %}
+                      yArray.push({{temp_value}});
+        {% endfor %}
+
+
+
+const data = [{
+  x:xArray,
+  y:yArray,
+  type:"bar",
+  orientation:"v",
+  marker: {color:"rgba(0,0,255,0.6)"}
+}];
+
+const layout = {title:"Pakistan Cities Temprature"};
+
+Plotly.newPlot("myPlot", data, layout);
+</script>
+
+</body>
+</html>
